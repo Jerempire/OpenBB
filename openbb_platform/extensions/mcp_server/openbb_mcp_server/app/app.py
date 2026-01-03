@@ -770,7 +770,10 @@ def main():
         logger.info("Shutdown requested via keyboard interrupt.")
         sys.exit(0)
     except Exception as e:
+        import traceback
         logger.error("Server error: %s", e)
+        # Print full traceback to stderr for Claude Desktop logs
+        traceback.print_exc(file=sys.stderr)
         sys.exit(1)
 
 
