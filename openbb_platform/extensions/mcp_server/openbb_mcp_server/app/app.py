@@ -678,21 +678,22 @@ class SSEShutdownWrapper:
         await self.asgi_app(scope, receive, safe_send)
 
 
-async def stdio_main(mcp_server):
+def stdio_main(mcp_server):
     """Run the MCP server in STDIO mode with signal handling."""
-    loop = asyncio.get_running_loop()
 
-    def signal_handler():
-        """Signal handler to exit the process immediately."""
+    def signal_handler(signum, frame):
+        """Signal handler to exit the process gracefully."""
         logger.info("Shutdown signal received. Terminating process.")
-        os._exit(0)  # pylint: disable=protected-access
+        sys.exit(0)
 
-    for sig in (signal.SIGINT, signal.SIGTERM):
-        loop.add_signal_handler(sig, signal_handler)
+    # Register signal handlers
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
 
     logger.info("Starting OpenBB MCP Server in STDIO mode. Press Ctrl+C to stop.")
 
-    await loop.run_in_executor(None, mcp_server.run, "stdio")
+    # Run the MCP server in stdio mode (this is a blocking call)
+    mcp_server.run("stdio")
 
 
 def main():
@@ -722,19 +723,25 @@ def main():
 
     try:
         # Use imported app if provided, otherwise default OpenBB app
+        logger.info("Initializing MCP server...")
         target_app = args.imported_app if args.imported_app else app
+        logger.info("FastAPI app loaded successfully")
 
         # Extract runtime configuration from settings
         http_run_kwargs = settings.get_http_run_kwargs()
         httpx_kwargs = settings.get_httpx_kwargs()
+        logger.info("Configuration extracted from settings")
 
         # Create MCP server with comprehensive configuration
+        logger.info("Creating MCP server instance...")
         mcp_server = create_mcp_server(
             settings, target_app, httpx_kwargs, auth=settings.server_auth
         )
+        logger.info("MCP server instance created successfully")
 
         if args.transport == "stdio":
-            asyncio.run(stdio_main(mcp_server))
+            logger.info("Starting server in STDIO mode...")
+            stdio_main(mcp_server)
         else:
             cors_middleware = _build_runtime_middleware()
 
@@ -770,7 +777,14 @@ def main():
         logger.info("Shutdown requested via keyboard interrupt.")
         sys.exit(0)
     except Exception as e:
-        logger.error("Server error: %s", e)
+        logger.error("Server error: %s", e, exc_info=True)
+        import traceback
+        print(f"\n{'='*80}\nFATAL ERROR:\n{'='*80}", file=sys.stderr)
+        print(f"Exception type: {type(e).__name__}", file=sys.stderr)
+        print(f"Exception message: {str(e)}", file=sys.stderr)
+        print(f"\nFull traceback:", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
+        print(f"{'='*80}\n", file=sys.stderr)
         sys.exit(1)
 
 
