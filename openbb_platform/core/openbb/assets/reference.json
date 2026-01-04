@@ -1,15 +1,3138 @@
 {
-    "openbb": "1.5.6core",
+    "openbb": "1.5.8core",
     "info": {
         "title": "OpenBB Platform (Python)",
         "description": "Investment research for everyone, anywhere.",
-        "core": "1.5.6",
+        "core": "1.5.8",
         "extensions": {
-            "openbb_core_extension": [],
-            "openbb_provider_extension": [],
+            "openbb_core_extension": [
+                "economy@1.5.0",
+                "equity@1.5.0",
+                "news@1.5.0"
+            ],
+            "openbb_provider_extension": [
+                "fred@1.5.0"
+            ],
             "openbb_obbject_extension": []
         }
     },
-    "paths": {},
-    "routers": {}
+    "paths": {
+        "/economy/survey/sloos": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get Senior Loan Officers Opinion Survey.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.survey.sloos()\nobb.economy.survey.sloos(category=credit_card)\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "category",
+                        "type": "Literal['spreads', 'consumer', 'auto', 'credit_card', 'firms', 'mortgage', 'commercial_real_estate', 'standards', 'demand', 'foreign_banks'] | None",
+                        "description": "Category of survey response.",
+                        "default": "spreads",
+                        "optional": true,
+                        "choices": [
+                            "spreads",
+                            "consumer",
+                            "auto",
+                            "credit_card",
+                            "firms",
+                            "mortgage",
+                            "commercial_real_estate",
+                            "standards",
+                            "demand",
+                            "foreign_banks"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "spreads",
+                                "consumer",
+                                "auto",
+                                "credit_card",
+                                "firms",
+                                "mortgage",
+                                "commercial_real_estate",
+                                "standards",
+                                "demand",
+                                "foreign_banks"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "transform",
+                        "type": "Literal['chg', 'ch1', 'pch', 'pc1', 'pca', 'cch', 'cca', 'log'] | None",
+                        "description": "Transformation type\n            None = No transformation\n            chg = Change\n            ch1 = Change from Year Ago\n            pch = Percent Change\n            pc1 = Percent Change from Year Ago\n            pca = Compounded Annual Rate of Change\n            cch = Continuously Compounded Rate of Change\n            cca = Continuously Compounded Annual Rate of Change\n            log = Natural Log",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "chg",
+                            "ch1",
+                            "pch",
+                            "pc1",
+                            "pca",
+                            "cch",
+                            "cca",
+                            "log"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "chg",
+                                "ch1",
+                                "pch",
+                                "pc1",
+                                "pca",
+                                "cch",
+                                "cca",
+                                "log"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "SeniorLoanOfficerSurvey",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "symbol",
+                        "type": "str | None",
+                        "description": "Symbol representing the entity requested in the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "value",
+                        "type": "float",
+                        "description": "Survey value.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "title",
+                        "type": "str | None",
+                        "description": "Survey title.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "model": "SeniorLoanOfficerSurvey",
+            "openapi_extra": {
+                "model": "SeniorLoanOfficerSurvey"
+            }
+        },
+        "/economy/survey/university_of_michigan": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get University of Michigan Consumer Sentiment and Inflation Expectations Surveys.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.survey.university_of_michigan()\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "frequency",
+                        "type": "Literal['quarter', 'annual'] | None",
+                        "description": "Frequency aggregation to convert monthly data to lower frequency. None is monthly.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "annual",
+                            "quarter"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "annual",
+                                "quarter"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": "Literal['avg', 'sum', 'eop'] | None",
+                        "description": "A key that indicates the aggregation method used for frequency aggregation.\n        \n    avg = Average\n        \n    sum = Sum\n        \n    eop = End of Period",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "avg",
+                            "sum",
+                            "eop"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "avg",
+                                "sum",
+                                "eop"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "transform",
+                        "type": "Literal['chg', 'ch1', 'pch', 'pc1', 'pca', 'cch', 'cca', 'log'] | None",
+                        "description": "Transformation type\n        \n    None = No transformation\n        \n    chg = Change\n        \n    ch1 = Change from Year Ago\n        \n    pch = Percent Change\n        \n    pc1 = Percent Change from Year Ago\n        \n    pca = Compounded Annual Rate of Change\n        \n    cch = Continuously Compounded Rate of Change\n        \n    cca = Continuously Compounded Annual Rate of Change\n        \n    log = Natural Log",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "chg",
+                            "ch1",
+                            "pch",
+                            "pc1",
+                            "pca",
+                            "cch",
+                            "cca",
+                            "log"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "chg",
+                                "ch1",
+                                "pch",
+                                "pc1",
+                                "pca",
+                                "cch",
+                                "cca",
+                                "log"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "UniversityOfMichigan",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "consumer_sentiment",
+                        "type": "float | None",
+                        "description": "Index of the results of the University of Michigan's monthly Survey of Consumers, which is used to estimate future spending and saving.  (1966:Q1=100).",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "inflation_expectation",
+                        "type": "float | None",
+                        "description": "Median expected price change next 12 months, Surveys of Consumers.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    }
+                ],
+                "fred": []
+            },
+            "model": "UniversityOfMichigan",
+            "openapi_extra": {
+                "model": "UniversityOfMichigan"
+            }
+        },
+        "/economy/survey/economic_conditions_chicago": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get The Survey Of Economic Conditions For The Chicago Region.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.survey.economic_conditions_chicago()\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "frequency",
+                        "type": "Literal['annual', 'quarter'] | None",
+                        "description": "Frequency aggregation to convert monthly data to lower frequency. None is monthly.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "annual",
+                            "quarter"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "annual",
+                                "quarter"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": "Literal['avg', 'sum', 'eop'] | None",
+                        "description": "A key that indicates the aggregation method used for frequency aggregation.\n        \n    avg = Average\n        \n    sum = Sum\n        \n    eop = End of Period",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "avg",
+                            "sum",
+                            "eop"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "avg",
+                                "sum",
+                                "eop"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "transform",
+                        "type": "Literal['chg', 'ch1', 'pch', 'pc1', 'pca', 'cch', 'cca', 'log'] | None",
+                        "description": "Transformation type\n        \n    None = No transformation\n        \n    chg = Change\n        \n    ch1 = Change from Year Ago\n        \n    pch = Percent Change\n        \n    pc1 = Percent Change from Year Ago\n        \n    pca = Compounded Annual Rate of Change\n        \n    cch = Continuously Compounded Rate of Change\n        \n    cca = Continuously Compounded Annual Rate of Change\n        \n    log = Natural Log",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "chg",
+                            "ch1",
+                            "pch",
+                            "pc1",
+                            "pca",
+                            "cch",
+                            "cca",
+                            "log"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "chg",
+                                "ch1",
+                                "pch",
+                                "pc1",
+                                "pca",
+                                "cch",
+                                "cca",
+                                "log"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "SurveyOfEconomicConditionsChicago",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "activity_index",
+                        "type": "float | None",
+                        "description": "Activity Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "one_year_outlook",
+                        "type": "float | None",
+                        "description": "One Year Outlook Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "manufacturing_activity",
+                        "type": "float | None",
+                        "description": "Manufacturing Activity Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "non_manufacturing_activity",
+                        "type": "float | None",
+                        "description": "Non-Manufacturing Activity Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "capital_expenditures_expectations",
+                        "type": "float | None",
+                        "description": "Capital Expenditures Expectations Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "hiring_expectations",
+                        "type": "float | None",
+                        "description": "Hiring Expectations Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "current_hiring",
+                        "type": "float | None",
+                        "description": "Current Hiring Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "labor_costs",
+                        "type": "float | None",
+                        "description": "Labor Costs Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "non_labor_costs",
+                        "type": "float | None",
+                        "description": "Non-Labor Costs Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "model": "SurveyOfEconomicConditionsChicago",
+            "openapi_extra": {
+                "model": "SurveyOfEconomicConditionsChicago"
+            }
+        },
+        "/economy/survey/manufacturing_outlook_texas": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get The Manufacturing Outlook Survey For The Texas Region.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.survey.manufacturing_outlook_texas()\nobb.economy.survey.manufacturing_outlook_texas(topic=business_outlook,new_orders, transform=pc1)\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "topic",
+                        "type": "Literal['business_activity', 'business_outlook', 'capex', 'prices_paid', 'production', 'inventory', 'new_orders', 'new_orders_growth', 'unfilled_orders', 'shipments', 'delivery_time', 'employment', 'wages', 'hours_worked'] | None | list[Literal['business_activity', 'business_outlook', 'capex', 'prices_paid', 'production', 'inventory', 'new_orders', 'new_orders_growth', 'unfilled_orders', 'shipments', 'delivery_time', 'employment', 'wages', 'hours_worked'] | None]",
+                        "description": "The topic for the survey response. Multiple items allowed.",
+                        "default": "new_orders_growth",
+                        "optional": true,
+                        "choices": [
+                            "business_activity",
+                            "business_outlook",
+                            "capex",
+                            "prices_paid",
+                            "production",
+                            "inventory",
+                            "new_orders",
+                            "new_orders_growth",
+                            "unfilled_orders",
+                            "shipments",
+                            "delivery_time",
+                            "employment",
+                            "wages",
+                            "hours_worked"
+                        ],
+                        "multiple_items_allowed": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "frequency",
+                        "type": "Literal['annual', 'quarter'] | None",
+                        "description": "Frequency aggregation to convert monthly data to lower frequency. None is monthly.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "annual",
+                            "quarter"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "annual",
+                                "quarter"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": "Literal['avg', 'sum', 'eop'] | None",
+                        "description": "A key that indicates the aggregation method used for frequency aggregation.\n            avg = Average\n            sum = Sum\n            eop = End of Period",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "avg",
+                            "sum",
+                            "eop"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "avg",
+                                "sum",
+                                "eop"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "transform",
+                        "type": "Literal['chg', 'ch1', 'pch', 'pc1', 'pca', 'cch', 'cca', 'log'] | None",
+                        "description": "Transformation type\n            None = No transformation\n            chg = Change\n            ch1 = Change from Year Ago\n            pch = Percent Change\n            pc1 = Percent Change from Year Ago\n            pca = Compounded Annual Rate of Change\n            cch = Continuously Compounded Rate of Change\n            cca = Continuously Compounded Annual Rate of Change\n            log = Natural Log",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "chg",
+                            "ch1",
+                            "pch",
+                            "pc1",
+                            "pca",
+                            "cch",
+                            "cca",
+                            "log"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "chg",
+                                "ch1",
+                                "pch",
+                                "pc1",
+                                "pca",
+                                "cch",
+                                "cca",
+                                "log"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "ManufacturingOutlookTexas",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "topic",
+                        "type": "str | None",
+                        "description": "Topic of the survey response.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "diffusion_index",
+                        "type": "float | None",
+                        "description": "Diffusion Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "percent_reporting_increase",
+                        "type": "float | None",
+                        "description": "Percent of respondents reporting an increase over the last month.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "percent_reporting_decrease",
+                        "type": "float | None",
+                        "description": "Percent of respondents reporting a decrease over the last month.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "percent_reporting_no_change",
+                        "type": "float | None",
+                        "description": "Percent of respondents reporting no change over the last month.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    }
+                ],
+                "fred": []
+            },
+            "model": "ManufacturingOutlookTexas",
+            "openapi_extra": {
+                "model": "ManufacturingOutlookTexas"
+            }
+        },
+        "/economy/survey/manufacturing_outlook_ny": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get the Empire State Manufacturing Survey.\n\nIt is a monthly survey of manufacturers in New York State conducted by the Federal Reserve Bank of New York.\n\nParticipants from across the state in a variety of industries respond to a questionnaire\nand report the change in a variety of indicators from the previous month.\n\nRespondents also state the likely direction of these same indicators six months ahead.\nApril 2002 is the first report, although survey data date back to July 2001.\n\nThe survey is sent on the first day of each month to the same pool of about 200\nmanufacturing executives in New York State, typically the president or CEO.\n\nAbout 100 responses are received. Most are completed by the tenth, although surveys are accepted until the fifteenth.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.survey.manufacturing_outlook_ny()\nobb.economy.survey.manufacturing_outlook_ny(topic=hours_worked,new_orders, transform=pc1, seasonally_adjusted=True)\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "topic",
+                        "type": "Literal['business_outlook', 'hours_worked', 'employment', 'inventories', 'prices_received', 'prices_paid', 'capex', 'unfilled_orders', 'new_orders', 'shipments', 'delivery_times'] | None | list[Literal['business_outlook', 'hours_worked', 'employment', 'inventories', 'prices_received', 'prices_paid', 'capex', 'unfilled_orders', 'new_orders', 'shipments', 'delivery_times'] | None]",
+                        "description": "The topic for the survey response. Multiple items allowed.",
+                        "default": "new_orders",
+                        "optional": true,
+                        "choices": [
+                            "business_outlook",
+                            "hours_worked",
+                            "employment",
+                            "inventories",
+                            "prices_received",
+                            "prices_paid",
+                            "capex",
+                            "unfilled_orders",
+                            "new_orders",
+                            "shipments",
+                            "delivery_times"
+                        ],
+                        "multiple_items_allowed": true,
+                        "json_schema_extra": {
+                            "x-widget_config": {
+                                "value": "new_orders"
+                            }
+                        }
+                    },
+                    {
+                        "name": "seasonally_adjusted",
+                        "type": "bool | None",
+                        "description": "Whether the data is seasonally adjusted, default is False",
+                        "default": false,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "frequency",
+                        "type": "Literal['quarter', 'annual'] | None",
+                        "description": "Frequency aggregation to convert monthly data to lower frequency. None is monthly.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": "Literal['avg', 'sum', 'eop'] | None",
+                        "description": "A key that indicates the aggregation method used for frequency aggregation.\n        avg = Average\n        sum = Sum\n        eop = End of Period",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "transform",
+                        "type": "Literal['chg', 'ch1', 'pch', 'pc1', 'pca', 'cch', 'cca', 'log'] | None",
+                        "description": "Transformation type\n        None = No transformation\n        chg = Change\n        ch1 = Change from Year Ago\n        pch = Percent Change\n        pc1 = Percent Change from Year Ago\n        pca = Compounded Annual Rate of Change\n        cch = Continuously Compounded Rate of Change\n        cca = Continuously Compounded Annual Rate of Change\n        log = Natural Log",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "ManufacturingOutlookNY",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "topic",
+                        "type": "str | None",
+                        "description": "Topic of the survey response.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "diffusion_index",
+                        "type": "float | None",
+                        "description": "Diffusion Index.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "percent_reporting_increase",
+                        "type": "float | None",
+                        "description": "Percent of respondents reporting an increase over the last month.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "percent_reporting_decrease",
+                        "type": "float | None",
+                        "description": "Percent of respondents reporting a decrease over the last month.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "percent_reporting_no_change",
+                        "type": "float | None",
+                        "description": "Percent of respondents reporting no change over the last month.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    }
+                ],
+                "fred": []
+            },
+            "model": "ManufacturingOutlookNY",
+            "openapi_extra": {
+                "widget_config": {
+                    "name": "Empire State Manufacturing Survey"
+                },
+                "model": "ManufacturingOutlookNY"
+            }
+        },
+        "/economy/survey/nonfarm_payrolls": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get Nonfarm Payrolls Survey.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.survey.nonfarm_payrolls()\nobb.economy.survey.nonfarm_payrolls(category=avg_hours)\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str | None | list[date | str | None]",
+                        "description": "A specific date to get data for. Default is the latest report. Multiple items allowed for provider(s): fred.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "fred": {
+                                "multiple_items_allowed": true
+                            }
+                        }
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "category",
+                        "type": "Literal['employees_nsa', 'employees_sa', 'employees_production_and_nonsupervisory', 'employees_women', 'employees_women_percent', 'avg_hours', 'avg_hours_production_and_nonsupervisory', 'avg_hours_overtime', 'avg_hours_overtime_production_and_nonsupervisory', 'avg_earnings_hourly', 'avg_earnings_hourly_production_and_nonsupervisory', 'avg_earnings_weekly', 'avg_earnings_weekly_production_and_nonsupervisory', 'index_weekly_hours', 'index_weekly_hours_production_and_nonsupervisory', 'index_weekly_payrolls', 'index_weekly_payrolls_production_and_nonsupervisory'] | None",
+                        "description": "The category to query.",
+                        "default": "employees_nsa",
+                        "optional": true,
+                        "choices": [
+                            "employees_nsa",
+                            "employees_sa",
+                            "employees_production_and_nonsupervisory",
+                            "employees_women",
+                            "employees_women_percent",
+                            "avg_hours",
+                            "avg_hours_production_and_nonsupervisory",
+                            "avg_hours_overtime",
+                            "avg_hours_overtime_production_and_nonsupervisory",
+                            "avg_earnings_hourly",
+                            "avg_earnings_hourly_production_and_nonsupervisory",
+                            "avg_earnings_weekly",
+                            "avg_earnings_weekly_production_and_nonsupervisory",
+                            "index_weekly_hours",
+                            "index_weekly_hours_production_and_nonsupervisory",
+                            "index_weekly_payrolls",
+                            "index_weekly_payrolls_production_and_nonsupervisory"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "employees_nsa",
+                                "employees_sa",
+                                "employees_production_and_nonsupervisory",
+                                "employees_women",
+                                "employees_women_percent",
+                                "avg_hours",
+                                "avg_hours_production_and_nonsupervisory",
+                                "avg_hours_overtime",
+                                "avg_hours_overtime_production_and_nonsupervisory",
+                                "avg_earnings_hourly",
+                                "avg_earnings_hourly_production_and_nonsupervisory",
+                                "avg_earnings_weekly",
+                                "avg_earnings_weekly_production_and_nonsupervisory",
+                                "index_weekly_hours",
+                                "index_weekly_hours_production_and_nonsupervisory",
+                                "index_weekly_payrolls",
+                                "index_weekly_payrolls_production_and_nonsupervisory"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "NonFarmPayrolls",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "symbol",
+                        "type": "str",
+                        "description": "Symbol representing the entity requested in the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "value",
+                        "type": "float",
+                        "description": "",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "name",
+                        "type": "str",
+                        "description": "The name of the series.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "element_id",
+                        "type": "str",
+                        "description": "The element id in the parent/child relationship.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "parent_id",
+                        "type": "str",
+                        "description": "The parent id in the parent/child relationship.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "children",
+                        "type": "str | None",
+                        "description": "The element_id of each child, as a comma-separated string.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "level",
+                        "type": "int",
+                        "description": "The indentation level of the element.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ]
+            },
+            "model": "NonFarmPayrolls",
+            "openapi_extra": {
+                "model": "NonFarmPayrolls"
+            }
+        },
+        "/economy/cpi": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get Consumer Price Index (CPI) data by country.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.cpi(country='japan,china,turkey')\n# Use the `transform` parameter to define the reference period for the change in values. Default is YoY.\nobb.economy.cpi(country='united_states,united_kingdom', transform='period')\n# Get the latest reported weightings of a country's CPI basket, from IMF.\nres = obb.economy.cpi(provider='imf', country='CAN', transform='weight_percent', expenditure='all', limit=1)\nprint(res.model_dump(include='results')['results'])\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "country",
+                        "type": "str | None | list[str | None]",
+                        "description": "The country to get data. Multiple items allowed for provider(s): fred.",
+                        "default": "united_states",
+                        "optional": true,
+                        "choices": [
+                            "australia",
+                            "austria",
+                            "belgium",
+                            "brazil",
+                            "bulgaria",
+                            "canada",
+                            "chile",
+                            "china",
+                            "croatia",
+                            "cyprus",
+                            "czech_republic",
+                            "denmark",
+                            "estonia",
+                            "finland",
+                            "france",
+                            "germany",
+                            "greece",
+                            "hungary",
+                            "iceland",
+                            "india",
+                            "indonesia",
+                            "ireland",
+                            "israel",
+                            "italy",
+                            "japan",
+                            "korea",
+                            "latvia",
+                            "lithuania",
+                            "luxembourg",
+                            "malta",
+                            "mexico",
+                            "netherlands",
+                            "new_zealand",
+                            "norway",
+                            "poland",
+                            "portugal",
+                            "romania",
+                            "russian_federation",
+                            "slovak_republic",
+                            "slovakia",
+                            "slovenia",
+                            "south_africa",
+                            "spain",
+                            "sweden",
+                            "switzerland",
+                            "turkey",
+                            "united_kingdom",
+                            "united_states"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "fred": {
+                                "multiple_items_allowed": true,
+                                "choices": [
+                                    "australia",
+                                    "austria",
+                                    "belgium",
+                                    "brazil",
+                                    "bulgaria",
+                                    "canada",
+                                    "chile",
+                                    "china",
+                                    "croatia",
+                                    "cyprus",
+                                    "czech_republic",
+                                    "denmark",
+                                    "estonia",
+                                    "finland",
+                                    "france",
+                                    "germany",
+                                    "greece",
+                                    "hungary",
+                                    "iceland",
+                                    "india",
+                                    "indonesia",
+                                    "ireland",
+                                    "israel",
+                                    "italy",
+                                    "japan",
+                                    "korea",
+                                    "latvia",
+                                    "lithuania",
+                                    "luxembourg",
+                                    "malta",
+                                    "mexico",
+                                    "netherlands",
+                                    "new_zealand",
+                                    "norway",
+                                    "poland",
+                                    "portugal",
+                                    "romania",
+                                    "russian_federation",
+                                    "slovak_republic",
+                                    "slovakia",
+                                    "slovenia",
+                                    "south_africa",
+                                    "spain",
+                                    "sweden",
+                                    "switzerland",
+                                    "turkey",
+                                    "united_kingdom",
+                                    "united_states"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "transform",
+                        "type": "str | None",
+                        "description": "Transformation of the CPI data.",
+                        "default": "yoy",
+                        "optional": true,
+                        "choices": [
+                            "index",
+                            "yoy",
+                            "period"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "fred": {
+                                "choices": [
+                                    "index",
+                                    "yoy",
+                                    "period"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "frequency",
+                        "type": "Literal['annual', 'quarter', 'monthly'] | None",
+                        "description": "The frequency of the data.",
+                        "default": "monthly",
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "harmonized",
+                        "type": "bool | None",
+                        "description": "If true, returns harmonized data.",
+                        "default": false,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "ConsumerPriceIndex",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "country",
+                        "type": "str",
+                        "description": "None",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "value",
+                        "type": "float",
+                        "description": "CPI index value or period change.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "model": "ConsumerPriceIndex",
+            "openapi_extra": {
+                "model": "ConsumerPriceIndex"
+            }
+        },
+        "/economy/balance_of_payments": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Balance of Payments Reports.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.balance_of_payments()\nobb.economy.balance_of_payments(country=brazil)\nobb.economy.balance_of_payments()\nobb.economy.balance_of_payments(report_type=summary)\n# The `country` parameter will override the `report_type`.\nobb.economy.balance_of_payments(country=united_states)\n```\n\n",
+            "parameters": {
+                "standard": [],
+                "fred": [
+                    {
+                        "name": "country",
+                        "type": "Literal['argentina', 'australia', 'austria', 'belgium', 'brazil', 'canada', 'chile', 'china', 'colombia', 'costa_rica', 'czechia', 'denmark', 'estonia', 'finland', 'france', 'germany', 'greece', 'hungary', 'iceland', 'india', 'indonesia', 'ireland', 'israel', 'italy', 'japan', 'korea', 'latvia', 'lithuania', 'luxembourg', 'mexico', 'netherlands', 'new_zealand', 'norway', 'poland', 'portugal', 'russia', 'saudi_arabia', 'slovak_republic', 'slovenia', 'south_africa', 'spain', 'sweden', 'switzerland', 'turkey', 'united_kingdom', 'united_states', 'g7', 'g20'] | None",
+                        "description": "The country to get data. Enter as a 3-letter ISO country code, default is USA.",
+                        "default": "united_states",
+                        "optional": true,
+                        "choices": [
+                            "argentina",
+                            "australia",
+                            "austria",
+                            "belgium",
+                            "brazil",
+                            "canada",
+                            "chile",
+                            "china",
+                            "colombia",
+                            "costa_rica",
+                            "czechia",
+                            "denmark",
+                            "estonia",
+                            "finland",
+                            "france",
+                            "germany",
+                            "greece",
+                            "hungary",
+                            "iceland",
+                            "india",
+                            "indonesia",
+                            "ireland",
+                            "israel",
+                            "italy",
+                            "japan",
+                            "korea",
+                            "latvia",
+                            "lithuania",
+                            "luxembourg",
+                            "mexico",
+                            "netherlands",
+                            "new_zealand",
+                            "norway",
+                            "poland",
+                            "portugal",
+                            "russia",
+                            "saudi_arabia",
+                            "slovak_republic",
+                            "slovenia",
+                            "south_africa",
+                            "spain",
+                            "sweden",
+                            "switzerland",
+                            "turkey",
+                            "united_kingdom",
+                            "united_states",
+                            "g7",
+                            "g20"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "BalanceOfPayments",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "period",
+                        "type": "date | None",
+                        "description": "The date representing the beginning of the reporting period.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "balance_percent_of_gdp",
+                        "type": "float | None",
+                        "description": "Current Account Balance as Percent of GDP",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "balance_total",
+                        "type": "float | None",
+                        "description": "Current Account Total Balance (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "balance_total_services",
+                        "type": "float | None",
+                        "description": "Current Account Total Services Balance (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "balance_total_secondary_income",
+                        "type": "float | None",
+                        "description": "Current Account Total Secondary Income Balance (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "balance_total_goods",
+                        "type": "float | None",
+                        "description": "Current Account Total Goods Balance (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "balance_total_primary_income",
+                        "type": "float | None",
+                        "description": "Current Account Total Primary Income Balance (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "credits_services_percent_of_goods_and_services",
+                        "type": "float | None",
+                        "description": "Current Account Credits Services as Percent of Goods and Services",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "credits_services_percent_of_current_account",
+                        "type": "float | None",
+                        "description": "Current Account Credits Services as Percent of Current Account",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "credits_total_services",
+                        "type": "float | None",
+                        "description": "Current Account Credits Total Services (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "credits_total_goods",
+                        "type": "float | None",
+                        "description": "Current Account Credits Total Goods (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "credits_total_primary_income",
+                        "type": "float | None",
+                        "description": "Current Account Credits Total Primary Income (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "credits_total_secondary_income",
+                        "type": "float | None",
+                        "description": "Current Account Credits Total Secondary Income (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "credits_total",
+                        "type": "float | None",
+                        "description": "Current Account Credits Total (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "debits_services_percent_of_goods_and_services",
+                        "type": "float | None",
+                        "description": "Current Account Debits Services as Percent of Goods and Services",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "debits_services_percent_of_current_account",
+                        "type": "float | None",
+                        "description": "Current Account Debits Services as Percent of Current Account",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {
+                            "x-unit_measurement": "percent",
+                            "x-frontend_multiply": 100
+                        }
+                    },
+                    {
+                        "name": "debits_total_services",
+                        "type": "float | None",
+                        "description": "Current Account Debits Total Services (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "debits_total_goods",
+                        "type": "float | None",
+                        "description": "Current Account Debits Total Goods (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "debits_total_primary_income",
+                        "type": "float | None",
+                        "description": "Current Account Debits Total Primary Income (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "debits_total",
+                        "type": "float | None",
+                        "description": "Current Account Debits Total (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "debits_total_secondary_income",
+                        "type": "float | None",
+                        "description": "Current Account Debits Total Secondary Income (USD)",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "model": "BalanceOfPayments",
+            "openapi_extra": {
+                "model": "BalanceOfPayments"
+            }
+        },
+        "/economy/fred_search": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Search for FRED series or economic releases by ID or string.\n\nThis does not return the observation values, only the metadata.\nUse this function to find series IDs for `fred_series()`.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.fred_search()\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "query",
+                        "type": "str | None",
+                        "description": "The search word(s).",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "search_type",
+                        "type": "Literal['full_text', 'series_id', 'release'] | None",
+                        "description": "The type of search to perform. Automatically set to 'release' when a 'release_id' is provided.",
+                        "default": "full_text",
+                        "optional": true,
+                        "choices": [
+                            "full_text",
+                            "series_id",
+                            "release"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "release_id",
+                        "type": "int | None",
+                        "description": "A specific release ID to target.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "limit",
+                        "type": "int | None",
+                        "description": "The number of data entries to return. (1-1000)",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "offset",
+                        "type": "int | None",
+                        "description": "Offset the results in conjunction with limit. This parameter is ignored When search_type is 'release'.",
+                        "default": 0,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "Literal['search_rank', 'series_id', 'title', 'units', 'frequency', 'seasonal_adjustment', 'realtime_start', 'realtime_end', 'last_updated', 'observation_start', 'observation_end', 'popularity', 'group_popularity'] | None",
+                        "description": "Order the results by a specific attribute. The default is 'observation_end'.",
+                        "default": "observation_end",
+                        "optional": true,
+                        "choices": [
+                            "search_rank",
+                            "series_id",
+                            "title",
+                            "units",
+                            "frequency",
+                            "seasonal_adjustment",
+                            "realtime_start",
+                            "realtime_end",
+                            "last_updated",
+                            "observation_start",
+                            "observation_end",
+                            "popularity",
+                            "group_popularity"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "sort_order",
+                        "type": "Literal['asc', 'desc'] | None",
+                        "description": "Sort the 'order_by' item in ascending or descending order. The default is 'desc'.",
+                        "default": "desc",
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "filter_variable",
+                        "type": "Literal['frequency', 'units', 'seasonal_adjustment'] | None",
+                        "description": "Filter by an attribute.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "filter_value",
+                        "type": "str | None",
+                        "description": "String value to filter the variable by.  Used in conjunction with filter_variable. This parameter is ignored when search_type is 'release'.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "tag_names",
+                        "type": "str | None | list[str | None]",
+                        "description": "A semicolon delimited list of tag names that series match all of.  Example: 'japan;imports' This parameter is ignored when search_type is 'release'. Multiple items allowed.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "exclude_tag_names",
+                        "type": "str | None | list[str | None]",
+                        "description": "A semicolon delimited list of tag names that series match none of.  Example: 'imports;services'. Requires that variable tag_names also be set to limit the number of matching series. This parameter is ignored when search_type is 'release'. Multiple items allowed.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "series_id",
+                        "type": "str | None",
+                        "description": "A FRED Series ID to return series group information for. This returns the required information to query for regional data. Not all series that are in FRED have geographical data. Entering a value for series_id will override all other parameters. Multiple series_ids can be separated by commas.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "FredSearch",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "release_id",
+                        "type": "str | None",
+                        "description": "The release ID for queries.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "series_id",
+                        "type": "str | None",
+                        "description": "The series ID for the item in the release.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "series_group",
+                        "type": "str | None",
+                        "description": "The series group ID of the series. This value is used to query for regional data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "region_type",
+                        "type": "str | None",
+                        "description": "The region type of the series.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "name",
+                        "type": "str | None",
+                        "description": "The name of the release.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "title",
+                        "type": "str | None",
+                        "description": "The title of the series.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "observation_start",
+                        "type": "date | None",
+                        "description": "The date of the first observation in the series.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "observation_end",
+                        "type": "date | None",
+                        "description": "The date of the last observation in the series.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "frequency",
+                        "type": "str | None",
+                        "description": "The frequency of the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "frequency_short",
+                        "type": "str | None",
+                        "description": "Short form of the data frequency.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "units",
+                        "type": "str | None",
+                        "description": "The units of the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "units_short",
+                        "type": "str | None",
+                        "description": "Short form of the data units.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "seasonal_adjustment",
+                        "type": "str | None",
+                        "description": "The seasonal adjustment of the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "seasonal_adjustment_short",
+                        "type": "str | None",
+                        "description": "Short form of the data seasonal adjustment.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "last_updated",
+                        "type": "datetime | None",
+                        "description": "The datetime of the last update to the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "popularity",
+                        "type": "int | None",
+                        "description": "Popularity of the series",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "group_popularity",
+                        "type": "int | None",
+                        "description": "Group popularity of the release",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "realtime_start",
+                        "type": "date | None",
+                        "description": "The realtime start date of the series.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "realtime_end",
+                        "type": "date | None",
+                        "description": "The realtime end date of the series.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "notes",
+                        "type": "str | None",
+                        "description": "Description of the release.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "press_release",
+                        "type": "bool | None",
+                        "description": "If the release is a press release.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "url",
+                        "type": "str | None",
+                        "description": "URL to the release.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "model": "FredSearch",
+            "openapi_extra": {
+                "model": "FredSearch"
+            }
+        },
+        "/economy/fred_series": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get data by series ID from FRED.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.fred_series(symbol='NFCI')\n# Multiple series can be passed in as a list.\nobb.economy.fred_series(symbol='NFCI,STLFSI4')\n# Use the `transform` parameter to transform the data as change, log, or percent change.\nobb.economy.fred_series(symbol='CBBTCUSD', transform=pc1)\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "symbol",
+                        "type": "str | list[str]",
+                        "description": "Symbol to get data for. Multiple items allowed for provider(s): fred.",
+                        "default": null,
+                        "optional": false,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "fred": {
+                                "multiple_items_allowed": true
+                            }
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "limit",
+                        "type": "int | None",
+                        "description": "The number of data entries to return.",
+                        "default": 100000,
+                        "optional": true,
+                        "choices": null,
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "limit",
+                        "type": "int | None",
+                        "description": "The number of data entries to return.",
+                        "default": 100000,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "frequency",
+                        "type": "Literal['a', 'q', 'm', 'w', 'd', 'wef', 'weth', 'wew', 'wetu', 'wem', 'wesu', 'wesa', 'bwew', 'bwem'] | None",
+                        "description": "Frequency aggregation to convert high frequency data to lower frequency.\n    None = No change\n    a = Annual\n    q = Quarterly\n    m = Monthly\n    w = Weekly\n    d = Daily\n    wef = Weekly, Ending Friday\n    weth = Weekly, Ending Thursday\n    wew = Weekly, Ending Wednesday\n    wetu = Weekly, Ending Tuesday\n    wem = Weekly, Ending Monday\n    wesu = Weekly, Ending Sunday\n    wesa = Weekly, Ending Saturday\n    bwew = Biweekly, Ending Wednesday\n    bwem = Biweekly, Ending Monday",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": "Literal['avg', 'sum', 'eop'] | None",
+                        "description": "A key that indicates the aggregation method used for frequency aggregation.\n        This parameter has no affect if the frequency parameter is not set.\n        avg = Average\n        sum = Sum\n        eop = End of Period",
+                        "default": "eop",
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "transform",
+                        "type": "Literal['chg', 'ch1', 'pch', 'pc1', 'pca', 'cch', 'cca', 'log'] | None",
+                        "description": "Transformation type\n    None = No transformation\n    chg = Change\n    ch1 = Change from Year Ago\n    pch = Percent Change\n    pc1 = Percent Change from Year Ago\n    pca = Compounded Annual Rate of Change\n    cch = Continuously Compounded Rate of Change\n    cca = Continuously Compounded Annual Rate of Change\n    log = Natural Log",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "FredSeries",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "model": "FredSeries",
+            "openapi_extra": {
+                "model": "FredSeries"
+            }
+        },
+        "/economy/fred_release_table": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get economic release data by ID and/or element from FRED.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\n# Get the top-level elements of a release by not supplying an element ID.\nobb.economy.fred_release_table(release_id='50')\n# Drill down on a specific section of the release.\nobb.economy.fred_release_table(release_id='50', element_id='4880')\n# Drill down on a specific table of the release.\nobb.economy.fred_release_table(release_id='50', element_id='4881')\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "release_id",
+                        "type": "str",
+                        "description": "The ID of the release. Use `fred_search` to find releases.",
+                        "default": null,
+                        "optional": false,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "element_id",
+                        "type": "str | None",
+                        "description": "The element ID of a specific table in the release.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "date",
+                        "type": "None | date | str | None | list[None | date | str | None]",
+                        "description": "A specific date to get data for. Multiple items allowed for provider(s): fred.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "fred": {
+                                "multiple_items_allowed": true
+                            }
+                        }
+                    }
+                ],
+                "fred": []
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "FredReleaseTable",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | None | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "level",
+                        "type": "int | None",
+                        "description": "The indentation level of the element.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "element_type",
+                        "type": "str | None",
+                        "description": "The type of the element.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "line",
+                        "type": "int | None",
+                        "description": "The line number of the element.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "element_id",
+                        "type": "str | None",
+                        "description": "The element id in the parent/child relationship.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "parent_id",
+                        "type": "str | None",
+                        "description": "The parent id in the parent/child relationship.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "children",
+                        "type": "str | None",
+                        "description": "The element_id of each child, as a comma-separated string.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "symbol",
+                        "type": "str | None",
+                        "description": "Symbol representing the entity requested in the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "name",
+                        "type": "str | None",
+                        "description": "The name of the series.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "value",
+                        "type": "float | None",
+                        "description": "The reported value of the series.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "model": "FredReleaseTable",
+            "openapi_extra": {
+                "model": "FredReleaseTable"
+            }
+        },
+        "/economy/fred_regional": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Query the Geo Fred API for regional economic data by series group.\n\nThe series group ID is found by using `fred_search` and the `series_id` parameter.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.fred_regional(symbol='NYICLAIMS')\n# With a date, time series data is returned.\nobb.economy.fred_regional(symbol='NYICLAIMS', start_date='2021-01-01', end_date='2021-12-31', limit=10)\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "symbol",
+                        "type": "str",
+                        "description": "Symbol to get data for.",
+                        "default": null,
+                        "optional": false,
+                        "choices": null,
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "limit",
+                        "type": "int | None",
+                        "description": "The number of data entries to return.",
+                        "default": 100000,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "symbol",
+                        "type": "str",
+                        "description": "For this function, it is the series_group ID or series ID. If the symbol provided is for a series_group, set the `is_series_group` parameter to True. Not all series that are in FRED have geographical data.",
+                        "default": null,
+                        "optional": false,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "is_series_group",
+                        "type": "bool | None",
+                        "description": "When True, the symbol provided is for a series_group, else it is for a series ID.",
+                        "default": false,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "region_type",
+                        "type": "Literal['bea', 'msa', 'frb', 'necta', 'state', 'country', 'county', 'censusregion'] | None",
+                        "description": "The type of regional data. Parameter is only valid when `is_series_group` is True.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "bea",
+                            "msa",
+                            "frb",
+                            "necta",
+                            "state",
+                            "country",
+                            "county",
+                            "censusregion"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "bea",
+                                "msa",
+                                "frb",
+                                "necta",
+                                "state",
+                                "country",
+                                "county",
+                                "censusregion"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "season",
+                        "type": "Literal['sa', 'nsa', 'ssa'] | None",
+                        "description": "The seasonal adjustments to the data. Parameter is only valid when `is_series_group` is True.",
+                        "default": "nsa",
+                        "optional": true,
+                        "choices": [
+                            "sa",
+                            "nsa",
+                            "ssa"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "sa",
+                                "nsa",
+                                "ssa"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "units",
+                        "type": "str | None",
+                        "description": "The units of the data. This should match the units returned from searching by series ID. An incorrect field will not necessarily return an error. Parameter is only valid when `is_series_group` is True.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "frequency",
+                        "type": "Literal['a', 'q', 'm', 'w', 'd', 'wef', 'weth', 'wew', 'wetu', 'wem', 'wesu', 'wesa', 'bwew', 'bwem'] | None",
+                        "description": "Frequency aggregation to convert high frequency data to lower frequency.\n        \n    None = No change\n        \n    a = Annual\n        \n    q = Quarterly\n        \n    m = Monthly\n        \n    w = Weekly\n        \n    d = Daily\n        \n    wef = Weekly, Ending Friday\n        \n    weth = Weekly, Ending Thursday\n        \n    wew = Weekly, Ending Wednesday\n        \n    wetu = Weekly, Ending Tuesday\n        \n    wem = Weekly, Ending Monday\n        \n    wesu = Weekly, Ending Sunday\n        \n    wesa = Weekly, Ending Saturday\n        \n    bwew = Biweekly, Ending Wednesday\n        \n    bwem = Biweekly, Ending Monday",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "a",
+                            "q",
+                            "m",
+                            "w",
+                            "d",
+                            "wef",
+                            "weth",
+                            "wew",
+                            "wetu",
+                            "wem",
+                            "wesu",
+                            "wesa",
+                            "bwew",
+                            "bwem"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "a",
+                                "q",
+                                "m",
+                                "w",
+                                "d",
+                                "wef",
+                                "weth",
+                                "wew",
+                                "wetu",
+                                "wem",
+                                "wesu",
+                                "wesa",
+                                "bwew",
+                                "bwem"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": "Literal['avg', 'sum', 'eop'] | None",
+                        "description": "A key that indicates the aggregation method used for frequency aggregation.\n        This parameter has no affect if the frequency parameter is not set.\n        \n    avg = Average\n        \n    sum = Sum\n        \n    eop = End of Period",
+                        "default": "eop",
+                        "optional": true,
+                        "choices": [
+                            "avg",
+                            "sum",
+                            "eop"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "avg",
+                                "sum",
+                                "eop"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "transform",
+                        "type": "Literal['chg', 'ch1', 'pch', 'pc1', 'pca', 'cch', 'cca', 'log'] | None",
+                        "description": "Transformation type\n        \n    None = No transformation\n        \n    chg = Change\n        \n    ch1 = Change from Year Ago\n        \n    pch = Percent Change\n        \n    pc1 = Percent Change from Year Ago\n        \n    pca = Compounded Annual Rate of Change\n        \n    cch = Continuously Compounded Rate of Change\n        \n    cca = Continuously Compounded Annual Rate of Change\n        \n    log = Natural Log",
+                        "default": null,
+                        "optional": true,
+                        "choices": [
+                            "chg",
+                            "ch1",
+                            "pch",
+                            "pc1",
+                            "pca",
+                            "cch",
+                            "cca",
+                            "log"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "chg",
+                                "ch1",
+                                "pch",
+                                "pc1",
+                                "pca",
+                                "cch",
+                                "cca",
+                                "log"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "FredRegional",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "region",
+                        "type": "str",
+                        "description": "The name of the region.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "code",
+                        "type": "str | int",
+                        "description": "The code of the region.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "value",
+                        "type": "int | float | None",
+                        "description": "The obersvation value. The units are defined in the search results by series ID.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "series_id",
+                        "type": "str",
+                        "description": "The individual series ID for the region.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ]
+            },
+            "model": "FredRegional",
+            "openapi_extra": {
+                "model": "FredRegional"
+            }
+        },
+        "/economy/retail_prices": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get retail prices for common items.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.retail_prices()\n# The price of eggs in the northeast census region.\nobb.economy.retail_prices(item='eggs', region=northeast)\n# The percentage change in price, from one-year ago, of various meats, US City Average.\nobb.economy.retail_prices(item='meats', transform=pc1)\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "item",
+                        "type": "str | None",
+                        "description": "The item or basket of items to query.",
+                        "default": null,
+                        "optional": true,
+                        "choices": null,
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "fred": {
+                                "multiple_items_allowed": false,
+                                "choices": [
+                                    "beverages",
+                                    "cereals",
+                                    "dairy",
+                                    "fuel",
+                                    "meats",
+                                    "produce",
+                                    "bacon",
+                                    "bananas",
+                                    "beans",
+                                    "beef",
+                                    "beer",
+                                    "bread",
+                                    "butter",
+                                    "cheese",
+                                    "chicken",
+                                    "chops",
+                                    "coffee",
+                                    "cookies",
+                                    "corn",
+                                    "diesel",
+                                    "eggs",
+                                    "electricity",
+                                    "flour",
+                                    "gas",
+                                    "gasoline",
+                                    "grapefruit",
+                                    "groud_beef",
+                                    "ham",
+                                    "ice_cream",
+                                    "lemons",
+                                    "lettuce",
+                                    "malt_beverages",
+                                    "milk",
+                                    "oil",
+                                    "orange_juice",
+                                    "oranges",
+                                    "potato_chips",
+                                    "potatoes",
+                                    "pork",
+                                    "rice",
+                                    "soft_drinks",
+                                    "spaghetti",
+                                    "steak",
+                                    "strawberries",
+                                    "sugar",
+                                    "tomatoes",
+                                    "unleaded",
+                                    "usda",
+                                    "vodka",
+                                    "wine",
+                                    "yogurt"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "country",
+                        "type": "str | None",
+                        "description": "The country to get data.",
+                        "default": "united_states",
+                        "optional": true,
+                        "choices": null,
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "fred": {
+                                "multiple_items_allowed": false,
+                                "choices": [
+                                    "united_states"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "type": "date | None | str",
+                        "description": "Start date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "end_date",
+                        "type": "date | None | str",
+                        "description": "End date of the data, in YYYY-MM-DD format.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "item",
+                        "type": "Literal['beverages', 'cereals', 'dairy', 'fuel', 'produce', 'meats', 'bacon', 'bananas', 'beans', 'beef', 'beer', 'bread', 'butter', 'cheese', 'chicken', 'chops', 'coffee', 'cookies', 'corn', 'diesel', 'eggs', 'electricity', 'flour', 'gas', 'gasoline', 'grapefruit', 'ground_beef', 'ham', 'ice_cream', 'lemons', 'lettuce', 'malt_beverages', 'milk', 'oil', 'orange_juice', 'oranges', 'pork', 'potato_chips', 'potatoes', 'rice', 'soft_drinks', 'spaghetti', 'steak', 'strawberries', 'sugar', 'tomatoes', 'unleaded', 'usda', 'vodka', 'wine', 'yogurt'] | None",
+                        "description": "The item or basket of items to query.",
+                        "default": "fuel",
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "country",
+                        "type": "Literal['united_states'] | None",
+                        "description": "The country to get data.",
+                        "default": "united_states",
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "region",
+                        "type": "Literal['all_city', 'northeast', 'midwest', 'south', 'west'] | None",
+                        "description": "The region to get average price levels for.",
+                        "default": "all_city",
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "frequency",
+                        "type": "Literal['annual', 'quarter', 'monthly'] | None",
+                        "description": "The frequency of the data.",
+                        "default": "monthly",
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "transform",
+                        "type": "Literal['chg', 'ch1', 'pch', 'pc1', 'pca', 'cch', 'cca', 'log'] | None",
+                        "description": "Transformation type\n    None = No transformation\n    chg = Change\n    ch1 = Change from Year Ago\n    pch = Percent Change\n    pc1 = Percent Change from Year Ago\n    pca = Compounded Annual Rate of Change\n    cch = Continuously Compounded Rate of Change\n    cca = Continuously Compounded Annual Rate of Change\n    log = Natural Log",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {}
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "RetailPrices",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | None | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "symbol",
+                        "type": "str | None",
+                        "description": "Symbol representing the entity requested in the data.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "country",
+                        "type": "str | None",
+                        "description": "",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "description",
+                        "type": "str | None",
+                        "description": "Description of the item.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "value",
+                        "type": "float | None",
+                        "description": "Price, or change in price, per unit.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": []
+            },
+            "model": "RetailPrices",
+            "openapi_extra": {
+                "model": "RetailPrices"
+            }
+        },
+        "/economy/pce": {
+            "deprecated": {
+                "flag": null,
+                "message": null
+            },
+            "description": "Get Personal Consumption Expenditures (PCE) reports.",
+            "examples": "Examples\n--------\n\n```python\nfrom openbb import obb\nobb.economy.pce()\n# Get reports for multiple dates, entered as a comma-separated string.\nobb.economy.pce(date='2024-05-01,2024-04-01,2023-05-01', category=pce_price_index)\n```\n\n",
+            "parameters": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str | None | list[date | str | None]",
+                        "description": "A specific date to get data for. Default is the latest report. Multiple items allowed for provider(s): fred.",
+                        "default": null,
+                        "optional": true,
+                        "choices": [],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "fred": {
+                                "multiple_items_allowed": true
+                            }
+                        }
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "category",
+                        "type": "Literal['personal_income', 'wages_by_industry', 'real_pce_percent_change', 'real_pce_quantity_index', 'pce_price_index', 'pce_dollars', 'real_pce_chained_dollars', 'pce_price_percent_change'] | None",
+                        "description": "The category to query.",
+                        "default": "personal_income",
+                        "optional": true,
+                        "choices": [
+                            "personal_income",
+                            "wages_by_industry",
+                            "real_pce_percent_change",
+                            "real_pce_quantity_index",
+                            "pce_price_index",
+                            "pce_dollars",
+                            "real_pce_chained_dollars",
+                            "pce_price_percent_change"
+                        ],
+                        "multiple_items_allowed": false,
+                        "json_schema_extra": {
+                            "choices": [
+                                "personal_income",
+                                "wages_by_industry",
+                                "real_pce_percent_change",
+                                "real_pce_quantity_index",
+                                "pce_price_index",
+                                "pce_dollars",
+                                "real_pce_chained_dollars",
+                                "pce_price_percent_change"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "OBBject": [
+                    {
+                        "name": "results",
+                        "type": "PersonalConsumptionExpenditures",
+                        "description": "Serializable results."
+                    },
+                    {
+                        "name": "provider",
+                        "type": "Optional[Literal['fred']]",
+                        "description": "Provider name."
+                    },
+                    {
+                        "name": "warnings",
+                        "type": "Optional[list[Warning_]]",
+                        "description": "list of warnings."
+                    },
+                    {
+                        "name": "chart",
+                        "type": "Optional[Chart]",
+                        "description": "Chart object."
+                    },
+                    {
+                        "name": "extra",
+                        "type": "dict[str, Any]",
+                        "description": "Extra info."
+                    }
+                ]
+            },
+            "data": {
+                "standard": [
+                    {
+                        "name": "date",
+                        "type": "date | str",
+                        "description": "The date of the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "symbol",
+                        "type": "str",
+                        "description": "Symbol representing the entity requested in the data.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "value",
+                        "type": "float",
+                        "description": "",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ],
+                "fred": [
+                    {
+                        "name": "name",
+                        "type": "str",
+                        "description": "The name of the series.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "element_id",
+                        "type": "str",
+                        "description": "The element id in the parent/child relationship.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "parent_id",
+                        "type": "str",
+                        "description": "The parent id in the parent/child relationship.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "children",
+                        "type": "str | None",
+                        "description": "The element_id of each child, as a comma-separated string.",
+                        "default": null,
+                        "optional": true,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "level",
+                        "type": "int",
+                        "description": "The indentation level of the element.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    },
+                    {
+                        "name": "line",
+                        "type": "int",
+                        "description": "The line number of the series in the table.",
+                        "default": null,
+                        "optional": false,
+                        "json_schema_extra": {}
+                    }
+                ]
+            },
+            "model": "PersonalConsumptionExpenditures",
+            "openapi_extra": {
+                "model": "PersonalConsumptionExpenditures"
+            }
+        }
+    },
+    "routers": {
+        "/economy": {
+            "description": "Economic data."
+        }
+    }
 }
